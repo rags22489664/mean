@@ -18,6 +18,15 @@ module.exports = function (app) {
     .put(articles.update)
     .delete(articles.delete);
 
+  app.route('/api/faker')
+  .get(articles.listFakerSchema)
+  .post(articles.createFakerSchema);
+
+  app.route('/api/faker/:fakerId')
+  .get(articles.listFakerSchema)
+  .post(articles.generateFakeData);
+
   // Finish by binding the article middleware
   app.param('articleId', articles.articleByID);
+  app.param('fakerId', articles.fakerSchemaById);
 };
